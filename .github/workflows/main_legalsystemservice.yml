@@ -16,7 +16,13 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-
+    - name: Get Version
+      id: vars
+      run: echo ::set-output name=version::$(cat VERSION)
+    - name: Test output
+      run: echo  ${{ steps.vars.outputs.version }}
+    - name: Set ENV
+      run: version=$(cat VERSION) && echo "versionis $version"
     - name: Set up Python version
       uses: actions/setup-python@v1
       with:
